@@ -3,11 +3,12 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import "./fonts.css";
 import "./styles.css";
 import { App } from "./App";
+import { routePath } from "./lib/site-path";
 
 const root = document.getElementById("root")!;
 const app = (
   <React.StrictMode>
-    <App path={window.location.pathname} />
+    <App path={routePath(window.location.pathname)} />
   </React.StrictMode>
 );
 if (root.querySelector("main")) hydrateRoot(root, app);

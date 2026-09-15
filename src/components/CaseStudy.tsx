@@ -1,6 +1,7 @@
 import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { Study, studies } from "../content/site";
 import { ContactBanner, Eyebrow } from "./Layout";
+import { sitePath } from "../lib/site-path";
 import {
   CareWorkspace,
   TenantVisual,
@@ -13,9 +14,9 @@ export function CaseStudy({ study }: { study: Study }) {
       <section className="case-hero">
         <div className="container">
           <nav className="breadcrumb" aria-label="Breadcrumb">
-            <a href="/">Home</a>
+            <a href={sitePath("/")}>Home</a>
             <ChevronRight size={13} aria-hidden="true" />
-            <a href="/#work">Selected work</a>
+            <a href={sitePath("/#work")}>Selected work</a>
             <ChevronRight size={13} aria-hidden="true" />
             <span aria-current="page">{study.name}</span>
           </nav>
@@ -136,7 +137,7 @@ export function CaseStudy({ study }: { study: Study }) {
             <p>{study.takeaway}</p>
             <a
               className="case-link"
-              href={`/contact/?interest=${encodeURIComponent(study.name + " — related healthcare product")}`}
+              href={sitePath(`/contact/?interest=${encodeURIComponent(study.name + " — related healthcare product")}`)}
             >
               Discuss a similar product{" "}
               <ArrowUpRight size={18} aria-hidden="true" />
@@ -151,7 +152,7 @@ export function CaseStudy({ study }: { study: Study }) {
               .map((item) => (
                 <a
                   className="text-link"
-                  href={`/work/${item.slug}/`}
+                  href={sitePath(`/work/${item.slug}/`)}
                   key={item.slug}
                 >
                   {item.name}

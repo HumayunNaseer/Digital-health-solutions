@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check, Mail, Loader2, LockKeyhole } from "lucide-react";
 import { Eyebrow } from "./Layout";
 import { profile } from "../content/site";
+import { sitePath } from "../lib/site-path";
 import {
   Inquiry,
   InquiryErrors,
@@ -119,7 +120,7 @@ export function Contact() {
           </p>
           <div className="contact-person">
             <img
-              src="/images/humayun-naseer.jpg"
+              src={sitePath("/images/humayun-naseer.jpg")}
               alt=""
               width="55"
               height="55"
@@ -313,7 +314,7 @@ export function Contact() {
                 ? "Your inquiry goes directly to my inbox."
                 : "Your email app opens with a draft for you to review and send."}{" "}
               <br /> Read how your information is handled in the{" "}
-              <a href="/privacy/">privacy notice</a>.
+              <a href={sitePath("/privacy/")}>privacy notice</a>.
             </p>
           </form>
           <p className="contact-reassurance">

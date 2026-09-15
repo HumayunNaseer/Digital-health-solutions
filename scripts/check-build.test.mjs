@@ -13,6 +13,7 @@ const routes = [
   "/privacy/",
   "/404/",
 ];
+const pagesBase = "/Digital-health-solutions";
 const htmlFor = (route) =>
   readFile(resolve("dist", `.${route}`, "index.html"), "utf8");
 let server;
@@ -61,11 +62,15 @@ test("local navigation and asset links resolve within the built site", async () 
       (match) => match[1],
     );
     for (const link of links) {
+      assert.ok(
+        link.startsWith(`${pagesBase}/`),
+        `${route} escapes the GitHub Pages project path: ${link}`,
+      );
       const target = new URL(
         link.replaceAll("&amp;", "&"),
         "https://portfolio.test",
       );
-      const targetPath = target.pathname;
+      const targetPath = target.pathname.slice(pagesBase.length) || "/";
       if (targetPath.includes("."))
         await access(resolve("dist", `.${targetPath}`));
       else {

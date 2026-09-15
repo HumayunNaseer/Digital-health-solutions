@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { ArrowUpRight, Menu, X, Linkedin } from "lucide-react";
 import { profile } from "../content/site";
+import { sitePath } from "../lib/site-path";
 
 export function BrandMark({ className = "" }: { className?: string }) {
   return (
@@ -37,7 +38,7 @@ export function ActionLink({
   return (
     <a
       className={`button ${secondary ? "button-secondary" : "button-primary"} ${className}`}
-      href={href}
+      href={sitePath(href)}
     >
       {children}
       <ArrowUpRight size={17} aria-hidden="true" />
@@ -63,7 +64,7 @@ export function Header({ path }: { path: string }) {
         }}
       >
         <div className="container header-inner">
-          <a href="/" className="brand" aria-label="Humayun Naseer — home">
+          <a href={sitePath("/")} className="brand" aria-label="Humayun Naseer — home">
             <BrandMark />
             <span>
               Humayun Naseer<small>Healthcare Technology Partner</small>
@@ -84,20 +85,20 @@ export function Header({ path }: { path: string }) {
             aria-label="Main navigation"
             className={`main-nav ${open ? "is-open" : ""}`}
           >
-            <a href="/#solutions" onClick={() => setOpen(false)}>
+            <a href={sitePath("/#solutions")} onClick={() => setOpen(false)}>
               Solutions
             </a>
             <a
-              href="/#work"
+              href={sitePath("/#work")}
               className={path.startsWith("/work/") ? "nav-current" : ""}
               onClick={() => setOpen(false)}
             >
               Selected work
             </a>
-            <a href="/#approach" onClick={() => setOpen(false)}>
+            <a href={sitePath("/#approach")} onClick={() => setOpen(false)}>
               Approach
             </a>
-            <a href="/#about" onClick={() => setOpen(false)}>
+            <a href={sitePath("/#about")} onClick={() => setOpen(false)}>
               About
             </a>
             <ActionLink className="nav-cta">Let’s talk</ActionLink>
@@ -152,7 +153,7 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="container footer-main">
-        <a className="brand" href="/">
+        <a className="brand" href={sitePath("/")}>
           <BrandMark />
           <span>
             Humayun Naseer<small>Thoughtful technology. Connected care.</small>
@@ -173,7 +174,7 @@ export function Footer() {
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} Humayun Naseer</span>
         <span>Built with care.</span>
-        <a href="/privacy/">Privacy</a>
+        <a href={sitePath("/privacy/")}>Privacy</a>
       </div>
     </footer>
   );

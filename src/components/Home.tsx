@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { studies, faqs, profile } from "../content/site";
 import { ActionLink, Eyebrow, ContactBanner } from "./Layout";
+import { sitePath } from "../lib/site-path";
 import {
   CareWorkspace,
   CareJourney,
@@ -47,7 +48,7 @@ export function Home() {
             </div>
             <div className="hero-signature">
               <img
-                src="/images/humayun-naseer.jpg"
+                src={sitePath("/images/humayun-naseer.jpg")}
                 alt=""
                 width="40"
                 height="40"
@@ -67,14 +68,14 @@ export function Home() {
             SELECTED EXPERIENCE IN <br />{" "}
             <strong>healthcare & neurodevelopment</strong>
           </p>
-          <a href="/work/neuronest/" className="wordmark wordmark-neuronest">
+          <a href={sitePath("/work/neuronest/")} className="wordmark wordmark-neuronest">
             neuro<span>nest</span>
           </a>
-          <a href="/work/learnme/" className="wordmark wordmark-learnme">
+          <a href={sitePath("/work/learnme/")} className="wordmark wordmark-learnme">
             Learn<span>Me</span>
             <span className="wordmark-dot" aria-hidden="true" />
           </a>
-          <a href="/work/reactneuro/" className="wordmark wordmark-react">
+          <a href={sitePath("/work/reactneuro/")} className="wordmark wordmark-react">
             REACT<span>NEURO</span>
           </a>
           <span className="experience-caption">
@@ -137,7 +138,7 @@ export function Home() {
                 <span>Assessments</span>
                 <span>Family engagement</span>
               </div>
-              <a href="/work/neuronest/" className="case-link light-link">
+              <a href={sitePath("/work/neuronest/")} className="case-link light-link">
                 Explore the case study{" "}
                 <ArrowUpRight size={20} aria-hidden="true" />
               </a>
@@ -154,7 +155,7 @@ export function Home() {
               >
                 <a
                   className="study-graphic-link"
-                  href={`/work/${study.slug}/`}
+                  href={sitePath(`/work/${study.slug}/`)}
                   aria-label={`Explore the ${study.name} case study`}
                 >
                   {study.slug === "learnme" ? (
@@ -171,13 +172,13 @@ export function Home() {
                       : "BRAIN HEALTH"}
                   </span>
                   <h3>
-                    <a href={`/work/${study.slug}/`}>
+                    <a href={sitePath(`/work/${study.slug}/`)}>
                       {study.name}
                       <ArrowUpRight size={24} aria-hidden="true" />
                     </a>
                   </h3>
                   <p>{study.short}</p>
-                  <a className="text-link" href={`/work/${study.slug}/`}>
+                  <a className="text-link" href={sitePath(`/work/${study.slug}/`)}>
                     Read the case study{" "}
                     <ArrowRight size={16} aria-hidden="true" />
                   </a>
@@ -260,7 +261,7 @@ export function Home() {
                   ))}
                 </ul>
                 <a
-                  href={`/contact/?interest=${encodeURIComponent(service.title)}`}
+                  href={sitePath(`/contact/?interest=${encodeURIComponent(service.title)}`)}
                 >
                   {service.label}
                   <ArrowUpRight size={17} aria-hidden="true" />
@@ -327,7 +328,7 @@ export function Home() {
           <div className="portrait-composition">
             <div className="portrait-label">THE PERSON BEHIND THE WORK</div>
             <img
-              src="/images/humayun-naseer.jpg"
+              src={sitePath("/images/humayun-naseer.jpg")}
               alt="Humayun Naseer, healthcare technology partner"
               width="700"
               height="700"
@@ -446,7 +447,7 @@ export function Home() {
             </h2>
             <p>
               Have something else in mind? <br />{" "}
-              <a href="/contact/" className="text-link">
+              <a href={sitePath("/contact/")} className="text-link">
                 Let’s discuss it <ArrowUpRight size={16} />
               </a>
             </p>
