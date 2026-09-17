@@ -14,6 +14,7 @@ import {
 import { studies, faqs, profile } from "../content/site";
 import { ActionLink, Eyebrow, ContactBanner } from "./Layout";
 import { sitePath } from "../lib/site-path";
+import { AIWorkflow } from "./AIWorkflow";
 import {
   CareWorkspace,
   CareJourney,
@@ -27,18 +28,18 @@ export function Home() {
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <Eyebrow>HEALTHCARE TECHNOLOGY & PRODUCT CONSULTING</Eyebrow>
+            <p className="hero-positioning">Your AI-Native Healthcare<br />Engineering Partner</p>
             <h1>
               Healthcare technology, <br /> built around <br />{" "}
               <em>the way care works.</em>
             </h1>
             <p className="hero-description">
               I help healthcare founders and care organizations turn complex
-              workflows into thoughtful digital products.
+              workflows into thoughtful digital products—with AI where it adds practical value.
             </p>
             <p className="hero-support">
-              From assessments and appointments to connected teams and
-              better-informed families.
+              Healthcare software experience in autism, neurodevelopment,
+              and therapy coordination.
             </p>
             <div className="hero-actions">
               <ActionLink>Discuss your healthcare product</ActionLink>
@@ -207,6 +208,7 @@ export function Home() {
               {
                 icon: Compass,
                 number: "01",
+                audience: "For healthcare founders",
                 title: "Shape & build your MVP",
                 text: "Turn a healthcare idea into a focused, achievable first product.",
                 items: [
@@ -219,6 +221,7 @@ export function Home() {
               {
                 icon: Workflow,
                 number: "02",
+                audience: "For clinics & therapy providers",
                 title: "Connect care & operations",
                 text: "Bring the people and processes around care into a coherent experience.",
                 items: [
@@ -231,11 +234,12 @@ export function Home() {
               {
                 icon: RefreshCw,
                 number: "03",
-                title: "Evolve your platform",
+                audience: "For healthtech product teams",
+                title: "Improve your platform",
                 text: "Move an existing healthcare product forward with considered improvements.",
                 items: [
                   "Product & architecture review",
-                  "Integrations & workflow improvements",
+                  "AI integrations & workflow improvements",
                   "Performance & maintainable growth",
                 ],
                 label: "For the product with more to do",
@@ -250,6 +254,7 @@ export function Home() {
                   />
                   <span>{service.number}</span>
                 </div>
+                <p className="service-audience">{service.audience}</p>
                 <h3>{service.title}</h3>
                 <p>{service.text}</p>
                 <ul>
@@ -271,6 +276,7 @@ export function Home() {
           </div>
         </div>
       </section>
+      <AIWorkflow />
       <section className="section approach-section" id="approach">
         <div className="container approach-grid">
           <div className="approach-intro">

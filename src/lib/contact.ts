@@ -22,9 +22,11 @@ export function validateInquiry(data: Inquiry): InquiryErrors {
 }
 
 const settings = {
-  service: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  template: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  // Public browser identifiers shared with P-F. Environment overrides remain
+  // available so deployment can use a separate service or template later.
+  service: import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_fqryn1f",
+  template: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_iv84aow",
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "Eh62kWt5YZ2OW467Y",
 };
 export const hasFormDelivery = Boolean(
   settings.service && settings.template && settings.publicKey,
@@ -42,7 +44,7 @@ export function emailDraftUrl(data: Inquiry) {
     `Name: ${data.name.trim()}`,
     `Email: ${data.email.trim()}`,
     data.organization.trim() ? `Organization: ${data.organization.trim()}` : "",
-    data.stage ? `Product stage: ${data.stage}` : "",
+    data.stage ? `Project interest: ${data.stage}` : "",
   ].join("\n");
   return `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
@@ -62,8 +64,26 @@ export async function deliverInquiry(data: Inquiry) {
       email: data.email.trim(),
       reply_to: data.email.trim(),
       subject,
-      message: `${data.message.trim()}\n\nOrganization: ${data.organization || "Not provided"}\nProduct stage: ${data.stage || "Not provided"}`,
-      time: new Date().toISOString(),
+      // Keep the existing template usable until the formatted template is saved.
+      message: [
+        "PROJECT DESCRIPTION",
+        data.message.trim(),
+        "",
+        "ORGANIZATION / WEBSITE",
+        data.organization.trim() || "Not provided",
+        "",
+        "PROJECT INTEREST",
+        data.stage || "Not selected",
+      ].join("\n"),
+      inquiry_message: data.message.trim(),
+      organization: data.organization.trim() || "Not provided",
+      project_interest: data.stage || "Not selected",
+      source: "Healthcare portfolio",
+      time: new Intl.DateTimeFormat("en-GB", {
+        dateStyle: "medium",
+        timeStyle: "short",
+        timeZone: "Asia/Karachi",
+      }).format(new Date()) + " (PKT)",
     },
     { publicKey: settings.publicKey },
   );

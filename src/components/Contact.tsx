@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Check, Mail, Loader2, LockKeyhole } from "lucide-react";
+import { ArrowUpRight, Check, Mail, Loader2, LockKeyhole, ChevronDown, ChevronUp } from "lucide-react";
+import * as Select from "@radix-ui/react-select";
 import { Eyebrow } from "./Layout";
 import { profile } from "../content/site";
 import { sitePath } from "../lib/site-path";
@@ -19,15 +20,33 @@ const initial: Inquiry = {
   stage: "",
   message: "",
 };
+const projectInterests = [
+  "An idea I’d like to explore",
+  "Planning or building an MVP",
+  "Improving an existing product",
+  "Looking for technical guidance",
+  "AI assistant or workflow automation",
+];
 const fieldNames: Record<keyof Inquiry, string> = {
   name: "Your name",
   email: "Email address",
   organization: "Organization",
-  stage: "Product stage",
+  stage: "Project interest",
   message: "What would you like to build or improve?",
 };
 
 export function Contact() {
+  const [copyStatus, setCopyStatus] = useState("");
+  async function copyText(kind: "email" | "inquiry") {
+    const text = kind === "email" ? profile.email :
+      `To: ${profile.email}\nSubject: Healthcare product inquiry\n\n${new URL(emailDraftUrl(data)).searchParams.get("body") || ""}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyStatus(kind === "email" ? "Email address copied." : "Inquiry copied. Paste it into your email service and send when ready.");
+    } catch {
+      setCopyStatus("Copy is unavailable in this browser. You can select and copy the email address and your message manually.");
+    }
+  }
   const [data, setData] = useState<Inquiry>(initial);
   const [errors, setErrors] = useState<InquiryErrors>({});
   const [status, setStatus] = useState<
@@ -55,6 +74,7 @@ export function Contact() {
       statusRef.current?.focus();
   }, [status]);
   function update(field: keyof Inquiry, value: string) {
+    setCopyStatus("");
     setData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
     if (status !== "loading") setStatus("idle");
@@ -248,21 +268,33 @@ export function Contact() {
             </div>
             <div className="form-field">
               <label htmlFor="stage">
-                Where are you in the journey? <span>optional</span>
+                What would you like help with? <span>optional</span>
               </label>
-              <select
-                id="stage"
+              <Select.Root
                 name="stage"
                 value={data.stage}
                 disabled={status === "loading"}
-                onChange={(e) => update("stage", e.target.value)}
+                onValueChange={(value) => update("stage", value)}
               >
-                <option value="">Select a product stage</option>
-                <option>An idea I’d like to explore</option>
-                <option>Planning or building an MVP</option>
-                <option>Improving an existing product</option>
-                <option>Looking for technical guidance</option>
-              </select>
+                <Select.Trigger id="stage" className="project-select-trigger">
+                  <Select.Value placeholder="Select a project interest" />
+                  <Select.Icon><ChevronDown size={17} aria-hidden="true" /></Select.Icon>
+                </Select.Trigger>
+                <Select.Portal>
+                  <Select.Content className="project-select-menu" position="popper" sideOffset={8} collisionPadding={16}>
+                    <Select.ScrollUpButton className="project-select-scroll"><ChevronUp size={16} aria-hidden="true" /></Select.ScrollUpButton>
+                    <Select.Viewport className="project-select-viewport">
+                      {projectInterests.map((interest) => (
+                        <Select.Item key={interest} value={interest} className="project-select-option">
+                          <Select.ItemText>{interest}</Select.ItemText>
+                          <Select.ItemIndicator className="project-select-check"><Check size={16} aria-hidden="true" /></Select.ItemIndicator>
+                        </Select.Item>
+                      ))}
+                    </Select.Viewport>
+                    <Select.ScrollDownButton className="project-select-scroll"><ChevronDown size={16} aria-hidden="true" /></Select.ScrollDownButton>
+                  </Select.Content>
+                </Select.Portal>
+              </Select.Root>
             </div>
             <div className="form-field">
               <label htmlFor="message">{fieldNames.message} *</label>
@@ -309,6 +341,11 @@ export function Contact() {
                 </>
               )}
             </button>
+            <div className="contact-copy-actions" aria-label="Copy contact details">
+              <button type="button" onClick={() => copyText("email")}>Copy email address</button>
+              <button type="button" onClick={() => copyText("inquiry")}>Copy inquiry</button>
+            </div>
+            <p className="copy-status" role="status" aria-live="polite">{copyStatus}</p>
             <p className="form-note">
               {hasFormDelivery
                 ? "Your inquiry goes directly to my inbox."

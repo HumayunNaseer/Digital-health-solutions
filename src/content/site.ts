@@ -12,11 +12,13 @@ export type Study = {
   short: string;
   period: string;
   role: string;
+  focus?: string;
   intro: string;
   challenge: string;
   users: string[];
   capabilities: { title: string; text: string }[];
   contribution: string;
+  delivered?: { title: string; detail: string }[];
   technology: string[];
   architecture: string;
   takeaway: string;
@@ -32,11 +34,12 @@ export const studies: Study[] = [
     title: "One care journey. Many people working together.",
     short:
       "Connecting assessments, therapy coordination, and family engagement in a multi-role healthcare platform.",
-    period: "2026",
-    role: "Senior Software Engineer",
+    period: "2026 – Present",
+    role: "Product & Engineering Lead",
+    focus: "Connected neurodevelopmental care",
     tone: "forest",
     intro:
-      "NeuroNest brings together autism and ADHD assessments, therapy, and family engagement. Its product scope spans the people who deliver care and the families navigating it.",
+      "NeuroNest brings together autism and ADHD assessments, therapy, care coordination, and family engagement in one connected healthcare platform. I lead the product’s end-to-end technical delivery, translating clinical and operational requirements into scalable workflows for the professionals delivering care and the families navigating it.",
     challenge:
       "A care journey involves more than a scheduled appointment. Parents need clarity, therapists need context, psychologists need assessment information, and coordinators need to understand what happens next. Supporting those distinct responsibilities is a central product challenge.",
     users: [
@@ -64,7 +67,7 @@ export const studies: Study[] = [
       },
     ],
     contribution:
-      "I contributed to NeuroNest as a Senior Software Engineer, working within the product’s healthcare and neurodevelopment context. The capabilities described here explain the platform as a whole; they are not a claim of sole authorship.",
+      "As Product & Engineering Lead, I lead NeuroNest’s end-to-end technical delivery, translating clinical and operational requirements into scalable product workflows. My work connects assessments, therapy, care coordination, and family engagement, supporting the professionals delivering care and the families navigating it.",
     technology: ["Ruby on Rails", "React", "AWS"],
     architecture:
       "A multi-role platform makes the relationship between roles, information, and actions an essential design consideration. The right interface depends on who is using it and where they are in the workflow.",
@@ -79,10 +82,11 @@ export const studies: Study[] = [
     short:
       "Full-stack architecture and multitenancy for a learning platform supporting children with autism.",
     period: "2023–2026",
-    role: "Full-Stack Developer",
+    role: "Lead Product Engineer",
+    focus: "Autism learning & multi-tenant healthcare technology",
     tone: "sage",
     intro:
-      "LearnMe is a learning platform for children with autism. My work combined application development with the architecture needed to support a multi-tenant product.",
+      "LearnMe is a digital learning platform designed to support children with autism. As the sole engineer on the product, I took it from initial development through production launch, owning the application architecture, full-stack implementation, multi-tenant setup, and deployment. The platform was used across the USA and Africa, supporting dozens of children through structured learning experiences and helping care teams manage their work across multiple organizations.",
     challenge:
       "A specialized learning product needs a dependable foundation as it expands. Supporting multiple organizations introduces questions about workspace boundaries, maintainability, and how the application is operated.",
     users: ["Organizations", "Learning support teams", "Children with autism"],
@@ -105,12 +109,18 @@ export const studies: Study[] = [
       },
     ],
     contribution:
-      "I led full-stack architecture, implemented multitenancy, and worked on application optimization using Passenger and Nginx. My role combined frontend and backend delivery with responsibility for the product’s technical foundation.",
+      "As Lead Product Engineer and the sole engineer on LearnMe, I owned technical delivery from initial development through production launch. I translated the product’s learning and organizational needs into a working application, bringing together architecture, full-stack implementation, multitenancy, and deployment. This work supported a platform used across the USA and Africa, helping care teams manage structured learning experiences for dozens of children with autism.",
+    delivered: [
+      { title: "From initial build to production launch", detail: "Owned the application’s engineering delivery as the sole engineer, taking LearnMe from initial development to a live product used by care teams and children." },
+      { title: "Application architecture & implementation", detail: "Designed and built the React frontend, Ruby on Rails application, and PostgreSQL data foundation to support structured learning experiences." },
+      { title: "Multi-tenant organization workspaces", detail: "Implemented multiple organization workspaces within one shared application, enabling care teams to manage their work in their own organizational context." },
+      { title: "Production deployment & optimization", detail: "Handled deployment and application optimization with Passenger and Nginx, completing the technical work needed to bring the platform into production." },
+    ],
     technology: ["Ruby on Rails", "React", "PostgreSQL", "Passenger", "Nginx"],
     architecture:
       "Multitenancy was a central engineering responsibility. Organization boundaries need to remain understandable in the application model while shared infrastructure stays maintainable as the product evolves.",
     takeaway:
-      "Practical experience connecting a specialized product’s requirements with the architecture and operating model of a multi-tenant platform.",
+      "The multitenancy work enabled the application to support multiple organizational workspaces. It connected the needs of a specialized learning product with a shared application architecture.",
   },
   {
     slug: "reactneuro",
@@ -195,9 +205,9 @@ export const faqs = [
 
 export const pageInfo = {
   "/": {
-    title: "Humayun Naseer — Healthcare Technology Partner",
+    title: "Humayun Naseer — AI-Native Healthcare Engineering Partner",
     description:
-      "I help healthcare founders and care organizations turn complex workflows into thoughtful digital products. Explore healthcare case studies and discuss your product.",
+      "Healthcare software engineering with experience in autism and neurodevelopment. Explore my work and discuss AI assistants, agents, and connected care workflows.",
   },
   "/contact/": {
     title: "Discuss Your Healthcare Product — Humayun Naseer",

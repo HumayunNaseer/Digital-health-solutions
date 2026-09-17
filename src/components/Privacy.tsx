@@ -8,7 +8,7 @@ export function Privacy() {
       <article className="privacy-page">
         <Eyebrow>YOUR INFORMATION</Eyebrow>
         <h1>Privacy, in plain language.</h1>
-        <p className="updated">Last updated: 14 September 2026</p>
+        <p className="updated">Last updated: 17 September 2026</p>
         <p>
           This portfolio introduces my healthcare technology work and lets you
           contact me about a business project.
@@ -16,7 +16,7 @@ export function Privacy() {
         <h2>When you get in touch</h2>
         <p>
           The inquiry form asks for your name, email address, and a description
-          of your project. Organization and product stage are optional. I use
+          of your project. Organization and project interest are optional. I use
           information you send to understand your inquiry and respond.
         </p>
         {hasFormDelivery ? (
@@ -35,6 +35,7 @@ export function Privacy() {
             site when you leave.
           </p>
         )}
+        <p>The copy buttons place the email address or your inquiry on your clipboard when you choose to use them. Copying does not send your inquiry.</p>
         <h2>Keep patient information out of inquiries</h2>
         <p>
           This is a business portfolio, not a patient portal or a place to

@@ -44,11 +44,10 @@ export function CaseStudy({ study }: { study: Study }) {
               <div>
                 <dt>Focus</dt>
                 <dd>
-                  {study.slug === "neuronest"
-                    ? "Connected care"
-                    : study.slug === "learnme"
+                  {study.focus ??
+                    (study.slug === "learnme"
                       ? "Neurodevelopment"
-                      : "Brain health"}
+                      : "Brain health")}
                 </dd>
               </div>
             </dl>
@@ -117,6 +116,12 @@ export function CaseStudy({ study }: { study: Study }) {
           <div>
             <h3>{study.role}</h3>
             <p>{study.contribution}</p>
+            {study.delivered && (
+              <div className="delivered-work">
+                <h3>Selected work I delivered</h3>
+                <dl>{study.delivered.map((item) => <div key={item.title}><dt>{item.title}</dt><dd>{item.detail}</dd></div>)}</dl>
+              </div>
+            )}
           </div>
         </section>
         <section className="case-section">
